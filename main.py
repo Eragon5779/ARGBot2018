@@ -1,11 +1,10 @@
 from twitter_scraper import get_tweets
 import markovify
-#import python-twitter
+import twitter
 
-#twitterAPI = twitter.Api(consumer_key='pc3BkUsw3fYRFowN4WTQOBphq',
-#                  consumer_secret='	IqHm6E3nvK75RoxBTpz3Uu87cC4pL3aBrvqU7sot876CyRD7Te',
-#                  access_token_key='967489509159038985-0P1B80wqyeOS6DBJPRmqQR1cFCIK0Zl',
-#                  access_token_secret='Kfs3XNHwEPcdwsSOIntAKLLOHCnppfnh94pCtCYb4OIKm')
+# Twitter API settings
+# These are in our Discord server! 
+# DO NOT COMMIT TO GIT WITH THE API KEYS
 
 def getopts(argv):
     opts = {}  # Empty dictionary to store key-value pairs.
@@ -15,6 +14,7 @@ def getopts(argv):
         argv = argv[1:]  # Reduce the argument list by copying it starting from index 1.
     return opts
 
+# Methods for scaping and for markov generation
 def scrape(account, numPage) :
 	tweets = '\n'.join([t for t in get_tweets(account, pages=numPage)])
 	return tweets
@@ -26,8 +26,9 @@ def generate(tweetData) :
 def printShortModel(textModel, size) :
 	print(textModel.make_short_sentence(size))
 
+# Default values for opts
 user = "InternetofShit"
-count = 1
+count = 5
 
 if __name__ == '__main__' :
 	from sys import argv
@@ -37,8 +38,8 @@ if __name__ == '__main__' :
 	if '-c' in myargs :
 		count = int(myargs['-c'])
 
-tweets = scrape(user, count)
-print(tweets.split('\n')[3])
+#tweets = scrape(user, count)
+#print(tweets.split('\n')[100])
 #textModel = generate(tweets)
 #printShortModel(textModel, 140)
-#print(twitterAPI.VerifyCredentials())
+#status = api.PostUpdate(Message Content)
