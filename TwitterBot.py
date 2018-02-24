@@ -6,13 +6,7 @@ import twitter
 # These are in our Discord server!
 # DO NOT COMMIT TO GIT WITH THE API KEYS
 
-def getopts(argv):
-    opts = {}  # Empty dictionary to store key-value pairs.
-    while argv:  # While there are arguments left to parse...
-        if argv[0][0] == '-':  # Found a "-name value" pair.
-            opts[argv[0]] = argv[1]  # Add key and value to the dictionary.
-        argv = argv[1:]  # Reduce the argument list by copying it starting from index 1.
-    return opts
+
 
 # Methods for scaping and for markov generation
 def scrape(account, numPage) :
@@ -29,14 +23,6 @@ def printShortModel(textModel, size) :
 # Default values for opts
 user = "InternetofShit"
 count = 5
-
-if __name__ == '__main__' :
-	from sys import argv
-	myargs = getopts(argv)
-	if '-u' in myargs : # Get user flag
-		user = myargs['-u']
-	if '-c' in myargs : # Get count flag
-		count = int(myargs['-c'])
 
 tweets = scrape(user, count)
 print(tweets.split('\n')[100])

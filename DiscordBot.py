@@ -19,11 +19,8 @@ async def on_ready():
 	print('Use this link to invite {}:'.format(client.user.name))
 	print('https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=121920'.format(client.user.id))
 	print('--------')
-	print('Support Discord Server: https://discord.gg/FNNNgqb')
-	print('Github Link: https://github.com/Habchy/BasicBot')
-	print('--------')
 	print('You are running ARGBot v0.1') #Do not change this. This will really help us support you, if you need support.
-	print('Created by Habchy#1665')
+	print('Created by The UNCo Team')
 	return await client.change_presence(game=discord.Game(name='! to play')) #This is buggy, let us know if it doesn't work.
 
 # This is a basic example of a call and response command. You tell it do "this" and it does it.
