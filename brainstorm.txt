@@ -1,0 +1,9 @@
+ARG:
+	true/false markov vs real tweets
+	guess who said markov tweet
+	ask alexa for the next step
+	ask alexa to tweet for you
+	ask alexa to message on discord for you
+	word hunt on discord
+	inverted 20 questions on discord
+	interactive fiction on discord
