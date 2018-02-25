@@ -17,7 +17,7 @@ async def on_ready():
 	print('Current Discord.py Version: {} | Current Python Version: {}'.format(discord.__version__, platform.python_version()))
 	print('--------')
 	print('Use this link to invite {}:'.format(client.user.name))
-	print('https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=121920'.format(client.user.id))
+	print('https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=268516352'.format(client.user.id))
 	print('--------')
 	print('You are running ARGBot v0.1') #Do not change this. This will really help us support you, if you need support.
 	print('Created by The UNCo Team')
@@ -38,26 +38,37 @@ questions = { "Is it a piece of technology?" : True,
 
 @client.event
 async def on_message(message) :
+	role = discord.utils.get(message.server.roles, name="twenty")
 	if message.author == client.user :
 		return
-	if "echo" in message.content.lower() :
+	if "echo" in message.content.lower() and message.channel.name != 'word-hunt':
 		await client.send_message(message.channel, "You got it <@%s>!" % (message.author.id))
 		await client.delete_message(message)
-	if "start" in message.content.lower() :
+		await client.add_roles(message.author, role)
+	if "start" in message.content.lower() and message.channel.name != 'word-hunt' :
 		await client.send_message(message.channel, 'Asking questions! Answer "true" or "false"')
 		for question in questions.keys() :
 			await client.send_message(message.channel, "<@%s>, %s" % (message.author.id, question))
 			def checkContent(msg) :
-				return 'echo' in msg.content.lower() or 'true' in msg.content.lower() or 'false' in msg.content.lower()
+				return 'echo' in msg.content.lower() or 'true' in msg.content.lower() or 'false' in msg.content.lower() or 'yes' in msg.content.lower() or 'no' in msg.content.lower()
 			msg = await client.wait_for_message(author=message.author, check=checkContent)
+			alt = False
+			if 'yes' in msg.content.lower() :
+				alt = True
+				
 			if msg.content.lower() == str(questions[question]).lower() :
+				await client.send_message(message.channel, "Correct <@%s>!" % msg.author.id)
+			elif alt == questions[question] :
 				await client.send_message(message.channel, "Correct <@%s>!" % msg.author.id)
 			elif "echo" in msg.content.lower() :
 				await client.send_message(message.channel, "You got it <@%s>!" % (message.author.id))
-				await client.delete_message(message)
+				await client.add_roles(message.author, role)
 				break
-			elif "false" in msg.content.lower() :
+			elif msg.content.lower() != str(questions[question]).lower()  :
 				await client.send_message(message.channel, "Incorrect <@%s>!" % msg.author.id)
+			elif alt != questions[question] :
+				await client.send_message(message.channel, "Incorrect <@%s>!" % msg.author.id)
+			await client.delete_message(msg)
 		await client.send_message(message.channel, 'Think you have an answer <@%s>? Type it in!' % message.author.id)
 
 # After you have modified the code, feel free to delete the line above so it does not keep popping up everytime you initiate the ping commmand.
