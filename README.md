@@ -1,15 +1,22 @@
-# To-Do
+# ARGBot 2018
 
-## Twitter
+## What is an ARG?
 
-### Twitter is done
+An alternate reality game (ARG) is an interactive networked narrative that uses the real world as a platform and employs transmedia storytelling to deliver a story that may be altered by players' ideas or actions.
 
-## Discord
+Taken from [Wikipedia](https://en.wikipedia.org/wiki/Alternate_reality_game)
 
-* Word Hunt
-  * Have hints at top of channel
-  * Delete every guess
-  * Add role if correct guess detected
-* Interactive Fiction
-  * Will talk about later
+## What is ARGBot?
 
+ARGBot is a bot that mixes a few different technologies to provide a unique puzzle experience. Going across Twitter and Discord, ARGBot uses Markov chains to try and fool the player with a fake tweet, then does a question-asking game on Discord. 
+
+## Technologies used
+
+* Markov Chains
+* Twitter Scraper
+* Twitter Python API
+* Discord Python API
+
+## How To Play
+
+Check the [#HackCU](https://twitter.com/hashtag/HackCU?src=hash) tag on Twitter for a tweet from [@ARGBot2018](https://twitter.com/argbot2018) with the first part of the game and its instructions!
