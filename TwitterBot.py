@@ -72,7 +72,7 @@ correct = []
 def checkDM() :
 	dms = api.GetDirectMessages()
 	for dm in dms :
-		if 'Q1' in dm.text or 'q1' in dm.text and dm.sender_id not in correct :
+		if ('Q1' in dm.text or 'q1' in dm.text) and dm.sender_id not in correct :
 			if answer in dm.text.lower() :
 				correct.append(dm.sender_id)
 				api.PostDirectMessage("Congratulations! Continue on Discord https://discord.gg/u9mrDVe", dm.sender_id)
