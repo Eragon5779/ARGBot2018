@@ -23,13 +23,42 @@ async def on_ready():
 	print('Created by The UNCo Team')
 	return await client.change_presence(game=discord.Game(name='! to play')) #This is buggy, let us know if it doesn't work.
 
-# This is a basic example of a call and response command. You tell it do "this" and it does it.
+# Questions dictionary
+questions = { "Is it a piece of technology?" : True,
+              "Does it glow pleasantly?" : True,
+              "Is it brightly colored?" : False,
+              "Is it personal?" : True,
+              "Does it love you?" : False,
+              "Is it a tube?" : True,
+              "Does it have personality?" : True,
+              "Is it well known?" : True,
+              "Is it a piece of software?" : False,
+              "Can it sing?" : True,
+              "Can it respond to your voice?" : True }
+
 @client.event
 async def on_message(message) :
-    if message.author == client.user :
-        return
-    if message.content.startswith(client.command_prefix + "test") :
-        await client.send_message(message.channel, "I received the test!")
+	if message.author == client.user :
+		return
+	if "echo" in message.content.lower() :
+		await client.send_message(message.channel, "You got it <@%s>!" % (message.author.id))
+		await client.delete_message(message)
+	if "start" in message.content.lower() :
+		await client.send_message(message.channel, 'Asking questions! Answer "true" or "false"')
+		for question in questions.keys() :
+			await client.send_message(message.channel, "<@%s>, %s" % (message.author.id, question))
+			def checkContent(msg) :
+				return 'echo' in msg.content.lower() or 'true' in msg.content.lower() or 'false' in msg.content.lower()
+			msg = await client.wait_for_message(author=message.author, check=checkContent)
+			if msg.content.lower() == str(questions[question]).lower() :
+				await client.send_message(message.channel, "Correct <@%s>!" % msg.author.id)
+			elif "echo" in msg.content.lower() :
+				await client.send_message(message.channel, "You got it <@%s>!" % (message.author.id))
+				await client.delete_message(message)
+				break
+			elif "false" in msg.content.lower() :
+				await client.send_message(message.channel, "Incorrect <@%s>!" % msg.author.id)
+		await client.send_message(message.channel, 'Think you have an answer <@%s>? Type it in!' % message.author.id)
 
 # After you have modified the code, feel free to delete the line above so it does not keep popping up everytime you initiate the ping commmand.
 client.run('')
