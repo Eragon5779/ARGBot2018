@@ -72,7 +72,7 @@ async def on_message(message) :
 		await client.send_message(message.channel, 'Think you have an answer <@%s>? Type it in!' % message.author.id)
 
 # After you have modified the code, feel free to delete the line above so it does not keep popping up everytime you initiate the ping commmand.
-client.run('')
+client.run('NDE3MDc2MDU0MzQwMDA5OTg0.DXNwtQ.mtt8NmXE-jExIgHH5i05H9LHhhM')
 
 # Basic Bot was created by Habchy#1665
 # Please join this Discord server if you need help: https://discord.gg/FNNNgqb
