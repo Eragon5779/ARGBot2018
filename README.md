@@ -2,14 +2,7 @@
 
 ## Twitter
 
-* 1 Markov vs. Real Tweet
-  * 80 characters for each
-  * Have a #ARGBot2018Q1
-  * PM with Discord if correct
-* Guess who said Markov
-  * Generate Markov based on popular person
-  * Have a #ARGBot2018Q2
-  * PM with Discord if correct
+### Twitter is done
 
 ## Discord
 
