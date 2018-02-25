@@ -28,13 +28,42 @@ def printShortModel(textModel, size) :
 
 # Default values for opts
 # user = "Lord_Voldemort7" CHOICE 1
-user = "Lord_Voldemort7"
+scrapeUsers = ["Lord_Voldemort7", "metaprophet", "InternetofShit", "deathstarpr", "dennysdiner", "automatofstyle"]#, "firstworldpains", "lmao"]
 count = 20
-
+answer = ""
 def MarkovVsReal(tweets, texModel) :
-	real = random.choice(tweets.split('\n'))
-	mark = textModel.make_short_sentence(100)
-	out = "Which is the real one? DM me with 'q1' and your answer (a or b)\nA. " + real + '\nB. ' + mark
+	real1 = ""
+	while not real1 or real1 == "" or ".com" in real1 or "@" in real1 or "#" in real1 and len(real1) > 70:
+		real1 = random.choice(tweets.split('\n'))
+	real2 = ""
+	while not real2 or real2 == "" or ".com" in real2 or "@" in real2 or "#" in real2 and len(real2) > 70:
+		real2 = random.choice(tweets.split('\n'))
+	mark = "@"
+	while mark == "" or ".com" in mark or "@" in mark or "#" in mark :
+		mark = textModel.make_short_sentence(70)
+	
+	global answer
+	rnd = [0, 0, 1]
+	shuffled = []
+	random.shuffle(rnd)
+	print(rnd)
+	if rnd[0] == 1 :
+		answer = 'a'
+		shuffled.append(mark)
+		shuffled.append(real1)
+		shuffled.append(real2)
+	elif rnd[1] == 1 :
+		answer = 'b'
+		shuffled.append(real1)
+		shuffled.append(mark)
+		shuffled.append(real2)
+	else :
+		answer = 'c'
+		shuffled.append(real2)
+		shuffled.append(real1)
+		shuffled.append(mark)
+
+	out = "Which is the fake tweet? DM me with 'q1' and your answer (a, b, c)\nA. " + shuffled[0] + '\nB. ' + shuffled[1] + '\nC. ' + shuffled[2]
 	print(out)
 	print("\n\n%d" % len(out))
 
@@ -44,30 +73,31 @@ def checkDM() :
 	dms = api.GetDirectMessages()
 	for dm in dms :
 		if 'Q1' in dm.text or 'q1' in dm.text and dm.sender_id not in correct :
-			if 'a' in dm.text or 'A' in dm.text :
+			if answer in dm.text.lower() :
 				correct.append(dm.sender_id)
 				api.PostDirectMessage("Congratulations! Continue on Discord https://discord.gg/u9mrDVe", dm.sender_id)
 				api.DestroyDirectMessage(dm.id)
-			if 'b' in dm.text or 'B' in dm.text :
+			else :
 				api.PostDirectMessage("Sorry! That is incorrect. Please try again", dm.sender_id)
+				api.DestroyDirectMessage(dm.id)
 
 def destroySent() :
 	sent = api.GetSentDirectMessages()
 	for dm in sent :
 		api.DestroyDirectMessage(dm.id)
 
-def destroyReceived() :
-	dms = api.GetDirectMessages()
-	for dm in dms :
-		api.DestroyDirectMessage(dm.id)
+tweets = ""
 
-tweets = scrape(user, count)
+for user in scrapeUsers :
+	tweets += scrape(user, count) + "\n"
+
+print(len(tweets))
+
 textModel = generate(tweets)
 MarkovVsReal(tweets, textModel)
 
 while True :
 	checkDM()
 	destroySent()
-	destroyReceived()
 	time.sleep(60)
 #status = api.PostUpdate(Message Content)
