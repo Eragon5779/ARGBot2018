@@ -12,10 +12,10 @@ ARGBot is a bot that mixes a few different technologies to provide a unique puzz
 
 ## Technologies used
 
-* Markov Chains
-* Twitter Scraper
-* Twitter Python API
-* Discord Python API
+* [Markov Chains](https://en.wikipedia.org/wiki/Markov_chain)
+* [Twitter Scraper](https://github.com/kennethreitz/twitter-scraper)
+* [Twitter Python API](https://github.com/bear/python-twitter)
+* [Discord Python API](https://github.com/Rapptz/discord.py)
 
 ## How To Play
 
