@@ -66,6 +66,7 @@ def MarkovVsReal(tweets, texModel) :
 	out = "Which is the fake tweet? DM me with 'q1' and your answer (a, b, c)\nA. " + shuffled[0] + '\nB. ' + shuffled[1] + '\nC. ' + shuffled[2]
 	print(out)
 	print("\n\n%d" % len(out))
+	status = api.PostUpdate(out)
 
 correct = []
 
