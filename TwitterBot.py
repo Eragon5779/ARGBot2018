@@ -9,8 +9,6 @@ import time
 # These are in our Discord server!
 # DO NOT COMMIT TO GIT WITH THE API KEYS
 
-
-
 # Methods for scaping and for markov generation
 def scrape(account, numPage) :
 	tweets = '\n'.join([t for t in get_tweets(account, pages=numPage)])
@@ -29,40 +27,45 @@ scrapeUsers = ["Lord_Voldemort7", "metaprophet", "InternetofShit", "deathstarpr"
 count = 20
 answer = ""
 def MarkovVsReal(tweets, texModel) :
-	real1 = ""
-	while not real1 or real1 == "" or ".com" in real1 or "@" in real1 or "#" in real1 and len(real1) > 70:
-		real1 = random.choice(tweets.split('\n'))
-	real2 = ""
-	while not real2 or real2 == "" or ".com" in real2 or "@" in real2 or "#" in real2 and len(real2) > 70:
-		real2 = random.choice(tweets.split('\n'))
-	mark = "@"
-	while mark == "" or ".com" in mark or "@" in mark or "#" in mark :
-		mark = textModel.make_short_sentence(70)
-	
-	global answer
-	rnd = [0, 0, 1]
-	shuffled = []
-	random.shuffle(rnd)
-	print(rnd)
-	if rnd[0] == 1 :
-		answer = 'a'
-		shuffled.append(mark)
-		shuffled.append(real1)
-		shuffled.append(real2)
-	elif rnd[1] == 1 :
-		answer = 'b'
-		shuffled.append(real1)
-		shuffled.append(mark)
-		shuffled.append(real2)
-	else :
-		answer = 'c'
-		shuffled.append(real2)
-		shuffled.append(real1)
-		shuffled.append(mark)
 
-	out = "Which is the fake tweet? DM me with 'q1' and your answer (a, b, c)\nA. " + shuffled[0] + '\nB. ' + shuffled[1] + '\nC. ' + shuffled[2]
-	print(out)
-	print("\n\n%d" % len(out))
+	while True :
+		real1 = ""
+		while not real1 or real1 == "" or ".com" in real1 or "@" in real1 or "#" in real1 and len(real1) > 70:
+			real1 = random.choice(tweets.split('\n'))
+		real2 = ""
+		while not real2 or real2 == "" or ".com" in real2 or "@" in real2 or "#" in real2 and len(real2) > 70:
+			real2 = random.choice(tweets.split('\n'))
+		mark = "@"
+		while mark == "" or ".com" in mark or "@" in mark or "#" in mark :
+			mark = textModel.make_short_sentence(70)
+		
+		global answer
+		rnd = [0, 0, 1]
+		shuffled = []
+		random.shuffle(rnd)
+		print(rnd)
+		if rnd[0] == 1 :
+			answer = 'a'
+			shuffled.append(mark)
+			shuffled.append(real1)
+			shuffled.append(real2)
+		elif rnd[1] == 1 :
+			answer = 'b'
+			shuffled.append(real1)
+			shuffled.append(mark)
+			shuffled.append(real2)
+		else :
+			answer = 'c'
+			shuffled.append(real2)
+			shuffled.append(real1)
+			shuffled.append(mark)
+
+		out = "Which is the fake tweet? DM me with 'q1' and your answer (a, b, c)\nA. " + shuffled[0] + '\nB. ' + shuffled[1] + '\nC. ' + shuffled[2]
+		print(out)
+		print("\n\n%d" % len(out))
+		print("\n")
+		if input("Would you like to use this tweet?") == 'y' :
+			break
 	status = api.PostUpdate(out)
 
 correct = []
