@@ -9,10 +9,7 @@ import time
 # These are in our Discord server!
 # DO NOT COMMIT TO GIT WITH THE API KEYS
 
-api = twitter.Api(consumer_key='fZpJFlF9Fe8z1adti8V0j0Zlt',
-                  consumer_secret='L2kqzY5WWcGZTuHYahr22ovFLAuGehOosjAuhumzjBrK59r87B',
-                  access_token_key='967489509159038985-47bTD4KSnlDo1xHVR2NgKwUNrThJhDG',
-                  access_token_secret='0wqifsXDexMA5IScnlKQ23a4lTI6kXrJN9NCMo6NW2q4a')
+
 
 # Methods for scaping and for markov generation
 def scrape(account, numPage) :
